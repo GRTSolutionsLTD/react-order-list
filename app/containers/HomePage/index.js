@@ -7,7 +7,7 @@ import './index.scss';
 export default function HomePage() {
   return (
     <div className="home-page">
-      <h1 className="h1-red">
+      <h1>
         <FormattedMessage {...messages.header} />
       </h1>
     </div>
