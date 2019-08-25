@@ -1,10 +1,16 @@
-/*
- * AppConstants
- * Each action has a corresponding type, which the reducer knows and picks up on.
- * To avoid weird typos between the reducer and the actions, we save them as
- * constants here. We prefix them with 'yourproject/YourComponent' so we avoid
- * reducers accidentally picking up actions they shouldn't.
- *
- * Follow this format:
- * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
- */
+// GET ORDER LIST
+export const LOAD_ORDER = 'boilerplate/App/LOAD_ORDER';
+export const LOAD_ORDER_SUCCESS = 'boilerplate/App/LOAD_ORDER_SUCCESS';
+export const LOAD_ORDER_ERROR = 'boilerplate/App/LOAD_ORDER_ERROR';
+
+// GET SPECIFIC ORDER
+export const GET_ORDER = 'boilerplate/App/GET_ORDER';
+
+// UPDATE ORDER
+export const UPDATE_ORDER = 'boilerplate/App/UPDATE_ORDER';
+
+// DELETE ORDER
+export const DELETE_ORDER = 'boilerplate/App/DELETE_ORDER';
+
+// ADD ORDER
+export const ADD_ORDER = 'boilerplate/App/ADD_ORDER';
