@@ -30,7 +30,7 @@ function updateOrder(orderList, updatedOrder) {
   const currentOrderIndex = newOrderList.findIndex(
     order => order.id === updatedOrder.id,
   );
-  newOrderList[currentOrderIndex] = updateOrder;
+  newOrderList[currentOrderIndex] = updatedOrder;
   return newOrderList;
 }
 
