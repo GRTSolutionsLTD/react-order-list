@@ -26,23 +26,28 @@ function getOrder(orderList, orderId) {
 }
 
 function updateOrder(orderList, updatedOrder) {
-  const currentOrderIndex = orderList.findIndex(
-    order => order.id === updatedOrder.Id,
+  const newOrderList = [...orderList];
+  const currentOrderIndex = newOrderList.findIndex(
+    order => order.id === updatedOrder.id,
   );
-  orderList.splice(currentOrderIndex, 1);
-  orderList.push(updatedOrder);
-  return orderList;
+  newOrderList[currentOrderIndex] = updateOrder;
+  return newOrderList;
 }
 
 function deleteOrder(orderList, orderId) {
+  const newOrderList = [...orderList];
   const currentOrderIndex = orderList.findIndex(order => order.id === orderId);
-  orderList.splice(currentOrderIndex, 1);
-  return orderList;
+  newOrderList.splice(currentOrderIndex, 1);
+  return newOrderList;
 }
 
 function addOrder(orderList, addedOrder) {
-  orderList.push(addedOrder);
-  return orderList;
+  let lastId = 0;
+  if (orderList.length > 0) lastId = orderList[orderList.length - 1].id;
+  const order = { id: lastId + 1, ...addedOrder };
+  const newOrderList = [...orderList];
+  newOrderList.push(order);
+  return newOrderList;
 }
 
 /* eslint-disable default-case, no-param-reassign */
@@ -76,7 +81,7 @@ const appReducer = (state = initialState, action) =>
 
       case DELETE_ORDER:
         draft.orders = deleteOrder(state.orders, action.orderId);
-        draft.currentOrder = null;
+        draft.currentOrder = false;
         break;
 
       case ADD_ORDER:

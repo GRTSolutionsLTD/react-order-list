@@ -11,6 +11,6 @@ export const scope = 'app.containers.OrderListPage';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'This is the OrderListPage container!',
+    defaultMessage: 'Order list:',
   },
 });

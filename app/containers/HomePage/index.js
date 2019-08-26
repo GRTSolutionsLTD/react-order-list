@@ -12,20 +12,12 @@ import messages from './messages';
 import './index.scss';
 
 export function HomePage({ orders }) {
-  function renderOrders() {
-    return orders.map(order => (
-      <div>
-        {order.id} {order.name}
-      </div>
-    ));
-  }
-
   return (
     <div className="home-page">
       <h1>
         <FormattedMessage {...messages.header} />
       </h1>
-      {renderOrders()};
+      <div>Order Count: {orders ? orders.length : 0}</div>
     </div>
   );
 }

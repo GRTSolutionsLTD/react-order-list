@@ -1,0 +1,12 @@
+$selected-color: blue;
+.order-list-page {
+  .order-container {
+    border: 1px solid black;
+    width: 300px;
+    display: inline-block;
+    margin-right: 50px;
+  }
+  .selected {
+    color: $selected-color;
+  }
+}
