@@ -3,9 +3,17 @@ import {
   LOAD_ORDER_SUCCESS,
   LOAD_ORDER_ERROR,
   GET_ORDER,
+  GET_ORDER_SUCCESS,
+  GET_ORDER_ERROR,
   UPDATE_ORDER,
+  UPDATE_ORDER_SUCCESS,
+  UPDATE_ORDER_ERROR,
   DELETE_ORDER,
+  DELETE_ORDER_SUCCESS,
+  DELETE_ORDER_ERROR,
   ADD_ORDER,
+  ADD_ORDER_SUCCESS,
+  ADD_ORDER_ERROR,
 } from './constants';
 
 // GET ORDER LIST
@@ -56,11 +64,40 @@ export function getOrder(orderId) {
   };
 }
 
+export function getOrderSuccess(order) {
+  return {
+    type: GET_ORDER_SUCCESS,
+    order,
+  };
+}
+
+export function getOrderError(error) {
+  return {
+    type: GET_ORDER_ERROR,
+    error,
+  };
+}
+
 // UPDATE ORDER
 export function updateOrder(order) {
   return {
     type: UPDATE_ORDER,
     order,
+  };
+}
+
+export function updateOrderSuccess(order, orders) {
+  return {
+    type: UPDATE_ORDER_SUCCESS,
+    order,
+    orders,
+  };
+}
+
+export function updateOrderError(error) {
+  return {
+    type: UPDATE_ORDER_ERROR,
+    error,
   };
 }
 
@@ -72,10 +109,39 @@ export function deleteOrder(orderId) {
   };
 }
 
+export function deleteOrderSuccess(orders) {
+  return {
+    type: DELETE_ORDER_SUCCESS,
+    orders,
+  };
+}
+
+export function deleteOrderError(error) {
+  return {
+    type: DELETE_ORDER_ERROR,
+    error,
+  };
+}
+
 // ADD ORDER
 export function addOrder(order) {
   return {
     type: ADD_ORDER,
     order,
+  };
+}
+
+export function addOrderSuccess(order, orders) {
+  return {
+    type: ADD_ORDER_SUCCESS,
+    order,
+    orders,
+  };
+}
+
+export function addOrderError(error) {
+  return {
+    type: ADD_ORDER_ERROR,
+    error,
   };
 }

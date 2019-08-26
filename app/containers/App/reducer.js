@@ -5,9 +5,17 @@ import {
   LOAD_ORDER_SUCCESS,
   LOAD_ORDER_ERROR,
   GET_ORDER,
+  GET_ORDER_SUCCESS,
+  GET_ORDER_ERROR,
   UPDATE_ORDER,
+  UPDATE_ORDER_SUCCESS,
+  UPDATE_ORDER_ERROR,
   DELETE_ORDER,
+  DELETE_ORDER_SUCCESS,
+  DELETE_ORDER_ERROR,
   ADD_ORDER,
+  ADD_ORDER_SUCCESS,
+  ADD_ORDER_ERROR,
 } from './constants';
 
 // The initial state of the App
@@ -17,36 +25,6 @@ export const initialState = {
   orders: false,
   currentOrder: false,
 };
-// mock functions
-function getOrder(orderList, orderId) {
-  const currentOrder = orderList.find(order => order.id === orderId);
-  return currentOrder;
-}
-
-function updateOrder(orderList, updatedOrder) {
-  const newOrderList = [...orderList];
-  const currentOrderIndex = newOrderList.findIndex(
-    order => order.id === updatedOrder.id,
-  );
-  newOrderList[currentOrderIndex] = updatedOrder;
-  return newOrderList;
-}
-
-function deleteOrder(orderList, orderId) {
-  const newOrderList = [...orderList];
-  const currentOrderIndex = orderList.findIndex(order => order.id === orderId);
-  newOrderList.splice(currentOrderIndex, 1);
-  return newOrderList;
-}
-
-function addOrder(orderList, addedOrder) {
-  let lastId = 0;
-  if (orderList.length > 0) lastId = orderList[orderList.length - 1].id;
-  const order = { id: lastId + 1, ...addedOrder };
-  const newOrderList = [...orderList];
-  newOrderList.push(order);
-  return newOrderList;
-}
 
 /* eslint-disable default-case, no-param-reassign */
 const appReducer = (state = initialState, action) =>
@@ -63,28 +41,43 @@ const appReducer = (state = initialState, action) =>
         draft.loading = false;
         break;
 
-      case LOAD_ORDER_ERROR:
-        draft.error = action.error;
-        draft.loading = false;
-        break;
-
       case GET_ORDER:
-        draft.currentOrder = getOrder(state.orders, action.orderId);
+        draft.loading = true;
+        draft.error = false;
+        draft.currentOrder = false;
         break;
 
-      case UPDATE_ORDER:
-        draft.orders = updateOrder(state.orders, action.order);
+      case GET_ORDER_SUCCESS:
+        draft.loading = false;
         draft.currentOrder = action.order;
         break;
 
       case DELETE_ORDER:
-        draft.orders = deleteOrder(state.orders, action.orderId);
+      case ADD_ORDER:
+      case UPDATE_ORDER:
+        draft.loading = true;
+        draft.error = false;
+        break;
+
+      case ADD_ORDER_SUCCESS:
+      case UPDATE_ORDER_SUCCESS:
+        draft.loading = false;
+        draft.orders = action.orders;
+        draft.currentOrder = action.order;
+        break;
+      case DELETE_ORDER_SUCCESS:
+        draft.loading = false;
+        draft.orders = action.orders;
         draft.currentOrder = false;
         break;
 
-      case ADD_ORDER:
-        draft.orders = addOrder(state.orders, action.order);
-        draft.currentOrder = action.order;
+      case GET_ORDER_ERROR:
+      case UPDATE_ORDER_ERROR:
+      case DELETE_ORDER_ERROR:
+      case ADD_ORDER_ERROR:
+      case LOAD_ORDER_ERROR:
+        draft.error = action.error;
+        draft.loading = false;
         break;
     }
   });
