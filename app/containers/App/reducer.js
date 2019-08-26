@@ -1,7 +1,5 @@
 import produce from 'immer';
 
-import * as data from 'data/order-data.json';
-
 import {
   LOAD_ORDER,
   LOAD_ORDER_SUCCESS,
@@ -16,7 +14,7 @@ import {
 export const initialState = {
   loading: false,
   error: false,
-  orders: data.default,
+  orders: false,
   currentOrder: false,
 };
 // mock functions
@@ -57,11 +55,11 @@ const appReducer = (state = initialState, action) =>
       case LOAD_ORDER:
         draft.loading = true;
         draft.error = false;
-        draft.userData.orders = false;
+        draft.orders = false;
         break;
 
       case LOAD_ORDER_SUCCESS:
-        draft.userData.orders = action.data;
+        draft.orders = action.orders;
         draft.loading = false;
         break;
 

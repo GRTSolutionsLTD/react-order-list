@@ -18,8 +18,6 @@ import {
   addOrder,
 } from 'containers/App/actions';
 
-import { useInjectSaga } from 'utils/injectSaga';
-import saga from './saga';
 import messages from './messages';
 
 import './index.scss';
@@ -35,7 +33,6 @@ export function OrderListPage({
   onUpdateOrder,
   onAddedOrder,
 }) {
-  useInjectSaga({ key: 'orderListPage', saga });
   const [addOrEditOrder, setAddOrEditOrder] = useState(false);
   const [addOrEditOrderType, setAddOrEditOrderType] = useState(AddOrderType);
 
